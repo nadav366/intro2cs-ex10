@@ -1,0 +1,85 @@
+nadav366
+205457534
+Nadav Har-tuv
+I talked about the ex with Guy Katz, Yair Shemer, Itay Tayar and Ortal Glatt.
+
+In the exercise this week we built an "asteroids" game.
+The goal was to continue to practice object counter programming,
+to implement complete software with all departments and their relationship.
+
+###############################
+#     General structure-      #
+###############################
+
+The basic class is an "object" that gives each object in the game the most
+basic attributes.
+From "object" class inherits three classes - "ship", "asteroid" and "torpedo".
+Each of them has other unique features.
+
+The other object is GameRunner Which is a game.
+The game class has a main function that is a loop of the game,
+which runs repeatedly at constant speed, and inside the loop there is a call
+to all the functions that need to occur in each loop.
+
+Loop calls are divided into moving and drawing all the objects,
+navigating and shooting the ship, checking the collision of the ship and
+testing the torpedo attack on the asteroid.
+Finally - check if the game is over.
+
+###############################
+#        special shot-        #
+###############################
+
+I chose to use a special shot that selects a nearby asteroid and changes the
+speed so that it tries to follow it.
+Type of "heat-guided missile".
+
+The special missile is a separate object that inherits from the torpedo class.
+
+The missile searches every 20 loops for new asteroid to follow, and each 5
+loops updates its speed by the position of the tracked asteroid.
+
+All the tests that I added for the special shot may slow the running of the
+program a bit and therefore it is worth examining it even
+without the special shot.
+
+###############################
+#    Design Considerations    #
+###############################
+
+1. In the special missile, all the actions he makes (to look for a new
+    asteroid each loop, and update the speed) slowed down the program very much
+    and caused a uneven and non-continuous flight of the torpedo.
+
+    I could have left the asteroid update and speed each loop, and so the
+    missile was more than accurate and hit better.
+
+    but I decided to look for a new asteroid just every 20 loops and update
+    every 5 speed, that way the program works better, and the missile's
+    flight was uniform.
+
+2. At first, I defined the speed of the special missile, in the same formula
+    as the standard missile (to the speed size)
+
+    But after a few games, with the special missile, I saw that the game became
+    too easy because every missile hits the asteroid and there is no challenge.
+
+    I could leave it as it was, and give the missile the speed it allowed.
+    But I chose to limit the size of the speed to 4.5, So the game would be
+    interesting.
+
+3. Another change I would make, is to limit the speed.
+
+    In the current situation, after a short press of increasing the speed,
+    the speed has become too high and the user loses control of the ship.
+
+    In my opinion, the speed of the ship should have been limited, and that is
+    how I designed the game, but I was told that it is not allowed in the
+    exercise settings, so I lowered the restriction .
+
+###############################
+#        Files I added        #
+###############################
+
+* game_object.py - The basic game object
+* special_torpedo.py - The special torpedo object
